@@ -87,26 +87,6 @@ if page == "🏠 Overview":
     col3.metric("ROC-AUC", f"{improved['roc_auc']:.3f}")
     col4.metric("Decision threshold", improved.get("decision_threshold", "N/A"))
 
-    st.markdown("---")
-    st.subheader("How it works")
-    st.markdown("""
-1. **Data**: 95 financial ratios per company; heavily imbalanced (~3.2% bankrupt).
-2. **Feature selection**: 10 features chosen by intersection of correlation ranking + Random Forest importance.
-3. **Baseline**: Logistic Regression with default threshold — misses most bankruptcies.
-4. **Improved model**: SMOTE oversampling + tuned Random Forest + optimised decision threshold.
-5. **Result**: Recall jumps from 14% → 66% while maintaining strong ROC-AUC (0.923).
-""")
-
-    st.info(
-        "⚠️ **Raw accuracy is misleading here.** A model that always predicts 'not bankrupt' "
-        "scores 96.8% accuracy while catching zero real bankruptcies. F1 and recall on the "
-        "bankrupt class are the metrics that matter."
-    )
-
-    st.subheader("Selected features")
-    for i, f in enumerate(features, 1):
-        st.markdown(f"**{i}.** {f}")
-
 # ══════════════════════════════════════════════════════════════════════════════
 # PAGE: Predict
 # ══════════════════════════════════════════════════════════════════════════════
